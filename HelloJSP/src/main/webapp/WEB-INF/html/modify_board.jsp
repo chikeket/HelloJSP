@@ -7,8 +7,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
-<h3>글상세화면(board.jsp)</h3>
-<form action="modifyForm.do">
+<h3>글수정화면(modify_board.jsp)</h3>
+<form action="modifyBoard.do">
 <input type="hidden" value="${board_info.boardNo }" name="bno">
 <table class="table">
 	<tr>
@@ -19,11 +19,12 @@
 	</tr>
 	<tr>
 		<th>제목</th>
-		<td colspan="5"><c:out value="${board_info.title }" /></td>
+		<td colspan="5"><input type="text" name="title" class="form-control" value="${board_info.title }"></td>
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td colspan="5"><c:out value="${board_info.content }" /></td>
+		<td colspan="5">
+		<textarea name="content" class="form-control">${board_info.content }</textarea></td>
 	</tr>
 	<tr>
 		<th>작성자</th>
@@ -36,9 +37,9 @@
 				value="${board_info.lastUpdateDate }" /></td>
 	</tr>
 	<tr>
-		<td colspan="6" align="center"><input type="submit" value="수정"
+		<td colspan="6" align="center"><input type="submit" value="저장"
 			class="btn btn-success">
-			<button type="button" class="btn btn-danger">삭제</button>
+			<button type="button" class="btn btn-secondary">취소</button>
 	    </td>
 	</tr>
 </table>
