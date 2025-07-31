@@ -11,19 +11,7 @@
 	<jsp:forward page="boardList.do"></jsp:forward>
 	<h3>Hello, JSP</h3>
 	
-	<!-- 밑에 변수 선언하는거랑 같은 의미임 -->
-	<c:set var="name" value="홍길동"></c:set>
-	<c:out value="${name }"></c:out>
 	
-	<!-- null, "" 둘다 boolean에서 같은 결과를 출력함 -->
-	<c:choose>
-	<c:when test="${not empty name }">
-	<p>정답</p>
-	</c:when>	
-	<c:otherwise>
-	<p>오답</p>
-	</c:otherwise>
-	</c:choose>
 	
 	
 	
@@ -37,6 +25,42 @@
 	<c:if test="${age >= 20 }">
 	<p>당신은 성년입니다</p>
 	</c:if>
+	
+	<c:choose>
+	<c:when test="${age >= 30 }">
+	<p style="color: red;">어른</p>
+	</c:when>
+	<!-- elseif에 해당  when 여러번 쓰는게 else if임-->
+	<c:when test="${age >= 20 }">
+	<p style="color: red;">청년</p>
+	</c:when>
+	<!-- else에 해당 -->
+	<c:otherwise>
+	<p style="color: green;">미성년</p>
+	</c:otherwise>
+	</c:choose>
+	
+	<c:forEach var="p" begin="1" end="5" step="1">
+	<p>2 * ${i } = ${2 *i }</p>
+	</c:forEach>
+	
+	<c:forEach var="p" begin="${paging.start}" end="${paging.end}">
+	<p>2 * ${i } = ${2 *i }</p>
+	</c:forEach>
+	
+	<!-- 밑에 변수 선언하는거랑 같은 의미임 -->
+	<c:set var="name" value="홍길동"></c:set>
+	<c:out value="${name }"></c:out>
+	
+	<!-- null, "" 둘다 boolean에서 같은 결과를 출력함 -->
+	<c:choose>
+	<c:when test="${not empty name }">
+	<p>정답</p>
+	</c:when>	
+	<c:otherwise>
+	<p>오답</p>
+	</c:otherwise>
+	</c:choose>
 	
 </body>
 </html>

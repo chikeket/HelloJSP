@@ -23,12 +23,16 @@ public class BoardControl implements Control{
 		
 		//parameter(?bno=3)
 		String bno = req.getParameter("bno");
+		String page = req.getParameter("page");
 		
 		BoardService svc = new BoardServiceImpl();
 		BoardVO board = svc.searchBoard(Integer.parseInt(bno));
-		
+		System.out.println("board.jsp");
+		System.out.println(page);
 		// board_info
 		req.setAttribute("board_info", board);
+		req.setAttribute("page", page);
+		
 		
 		// 요청재지정 객체				
 		// 요청재지정. 경로는 webapp이 제일 상위경로라서 그 밑인 WEB_INF부터 적는거임

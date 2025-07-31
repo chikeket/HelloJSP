@@ -5,9 +5,11 @@
 
 <jsp:include page="includes/header.jsp" />
 
-
+<!-- 
 <p>${ board_list}</p>
 <p>${ paging}</p>
+ -->
+
 
 <!-- 검색 -->
 <div class="center">
@@ -47,7 +49,7 @@
 			<tr>
 				<td><c:out value="${board.boardNo }" /></td>
 				<!-- 공백도 하나의 값이니까 잘 보고 넣자      특히 밑에 홑따옴표 앞에 요런 부분 -->
-				<td><a href='board.do?bno=${board.boardNo }'>${board.title }</a></td>
+				<td><a href='board.do?bno=${board.boardNo }&page=${paging.currPage}'>${board.title }</a></td>
 				<td>${board.writer }</td>
 				<td>${board.viewCnt }</td>
 			</tr>
