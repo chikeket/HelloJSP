@@ -21,7 +21,7 @@ public class BoardControl implements Control{
 			      throws ServletException, IOException{
 //		System.out.println("글상세 컨트롤.");
 		
-		//parameter(?bno=3)
+		//parameter(board.do?bno=3&page=1)
 		String bno = req.getParameter("bno");
 		String page = req.getParameter("page");
 		
@@ -36,7 +36,7 @@ public class BoardControl implements Control{
 		
 		// 요청재지정 객체				
 		// 요청재지정. 경로는 webapp이 제일 상위경로라서 그 밑인 WEB_INF부터 적는거임
-	req.getRequestDispatcher("WEB-INF/html/board.jsp").forward(req, resp);
+	req.getRequestDispatcher("user/board.tiles").forward(req, resp);
 		
 	}
 }

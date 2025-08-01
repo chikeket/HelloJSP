@@ -53,12 +53,14 @@
 		board_no,
 		title,
 		content,
-		writer)
+		writer,
+		image)
 		values(
 		board_seq.nextval,
 		#{title},
 		#{content},
-		#{writer})
+		#{writer},
+		#{image})
 	</insert>
 
 	<!-- delete -->

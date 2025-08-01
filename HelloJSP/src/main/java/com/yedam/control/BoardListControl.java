@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.yedam.common.Control;
 import com.yedam.common.PageDTO;
@@ -45,9 +46,30 @@ public class BoardListControl implements Control{
 				req.setAttribute("searchCondition", sc);
 				req.setAttribute("keyword", kw);
 				
-				// 요청재지정 객체				
+				//권한에 따라 템플릿적용.
+				HttpSession session = req.getSession();
+				String authority = (String) session.getAttribute("auth");
+				
+				//손님이면 일반사용자 템플릿을 사용.
+				if (authority == null) {
+					req.getRequestDispatcher("user/board_list.tiles")
+					.forward(req, resp);
+					return;
+				}
+				//게스트로 브라우저 방문했을때
+				if(authority.equals("User")) {
+					// 요청재지정 객체				
 					// 요청재지정. 경로는 webapp이 제일 상위경로라서 그 밑인 WEB_INF부터 적는거임
-				req.getRequestDispatcher("WEB-INF/html/board_list.jsp").forward(req, resp);
+					req.getRequestDispatcher("user/board_list.tiles")
+					.forward(req, resp);
+					
+				} else if(authority.equals("Admin")) {
+					req.getRequestDispatcher("manager/board_list.tiles")
+					.forward(req, resp);
+					
+				}
+				
+				
 				
 
 		}

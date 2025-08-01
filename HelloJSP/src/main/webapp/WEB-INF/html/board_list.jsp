@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:include page="includes/header.jsp" />
+
 
 <!-- 
 <p>${ board_list}</p>
@@ -53,7 +53,7 @@
 				<td>${board.writer }</td>
 				<td>${board.viewCnt }</td>
 			</tr>
-
+<img src="" >
 		</c:forEach>
 	</tbody>
 </table>
@@ -102,4 +102,3 @@
 	</ul>
 </nav>
 
-<jsp:include page="includes/footer.jsp" />
