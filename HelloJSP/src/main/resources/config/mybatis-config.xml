@@ -8,11 +8,14 @@
 <!-- DB 칼럼에 _가 있는 컬럼을 매핑해서 자바에서 인식하게 만드는 기능 -->
 <settings>
 <setting name="mapUnderscoreToCamelCase" value="true"/>
+<setting name="jdbcTypeForNull" value="NULL"/>
+
 </settings>
 <!-- 데이터타입 별칭. -->
 <typeAliases>
 <typeAlias alias="board" type="com.yedam.vo.BoardVO"/>
 <typeAlias alias="search" type="com.yedam.common.SearchDTO"/>
+<typeAlias alias="member" type="com.yedam.vo.MemberVO"/>
 </typeAliases>
   <environments default="development">
     <environment id="development">
@@ -27,5 +30,6 @@
   </environments>
   <mappers>
     <mapper resource="com/yedam/mapper/BoardMapper.xml"/>
+    <mapper resource="com/yedam/mapper/MemberMapper.xml"/>
   </mappers>
 </configuration>
