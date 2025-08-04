@@ -26,15 +26,16 @@
 	<p>당신은 성년입니다</p>
 	</c:if>
 	
+	<!-- elseif에 해당  when 여러번 쓰는게 else if임-->
+	<!-- else에 해당 -->
+	
 	<c:choose>
 	<c:when test="${age >= 30 }">
 	<p style="color: red;">어른</p>
 	</c:when>
-	<!-- elseif에 해당  when 여러번 쓰는게 else if임-->
 	<c:when test="${age >= 20 }">
 	<p style="color: red;">청년</p>
 	</c:when>
-	<!-- else에 해당 -->
 	<c:otherwise>
 	<p style="color: green;">미성년</p>
 	</c:otherwise>

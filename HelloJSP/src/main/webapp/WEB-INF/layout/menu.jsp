@@ -17,7 +17,7 @@
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="logout.do">로그아웃(<img src="upload/poxterier.jpg" width=50px style=border-radius:50% >)</a>
                    </c:otherwise> 
                   </c:choose>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="js.do">JS연습</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
                 </div>
             </div>
