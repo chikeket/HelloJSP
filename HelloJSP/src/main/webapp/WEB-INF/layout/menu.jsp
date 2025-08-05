@@ -4,7 +4,7 @@
     
 <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
-                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap(${logId })</div>
+                <div class="sidebar-heading border-bottom bg-light">Start Bootstrap <c:if test="${logId != null}"> (${logId})</c:if></div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">글목록</a>
                   <c:choose>

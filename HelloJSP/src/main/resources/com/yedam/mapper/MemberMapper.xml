@@ -15,4 +15,43 @@
 	where member_id = #{id}
 	and member_pw = #{pw}
 	</select>
+	
+	<select id="selectList" resultType="member" parameterType="search">
+		select ta.*
+        from (select rownum rn, b.*
+              from tbl_member b
+              <where><!-- where 태그로 덮어주면 안에 조건에 만족하면 where문을 생성시켜줌 모두 불만족이면 where문이 안나옴 -->
+              <if test="searchCondition != null and searchCondition == 'T'.toString() ">
+              member_id like '%'||#{keyword}||'%'
+              </if>
+              <if test="searchCondition != null and searchCondition == 'W'.toString() ">
+              member_name like '%'||#{keyword}||'%'
+              </if>
+              <if test="searchCondition != null and searchCondition == 'TW'.toString() ">
+              member_id like '%'||#{keyword}||'%' or member_name like '%'||#{keyword}||'%'
+              </if>
+              </where>
+              ) ta
+        where ta.rn > (#{page} - 1) * 5
+        <![CDATA[
+        and ta.rn <= #{page} * 5
+        ]]>
+	</select>
+	
+	<!-- 전체건수. -->
+	<select id="selectCount" resultType="int">
+	  select count(1)
+      from tbl_member
+      <where><!-- where 태그로 덮어주면 안에 조건에 만족하면 where문을 생성시켜줌 모두 불만족이면 where문이 안나옴 -->
+          <if test="searchCondition != null and searchCondition == 'T'.toString() ">
+            member_id like '%'||#{keyword}||'%'
+          </if>
+          <if test="searchCondition != null and searchCondition == 'W'.toString() ">
+            member_name like '%'||#{keyword}||'%'
+          </if>
+          <if test="searchCondition != null and searchCondition == 'TW'.toString() ">
+            member_id like '%'||#{keyword}||'%' or member_name like '%'||#{keyword}||'%'
+          </if>
+       </where>
+	</select>
 </mapper>

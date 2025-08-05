@@ -1,9 +1,13 @@
 package com.yedam.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.common.DBUtil;
+import com.yedam.common.SearchDTO;
 import com.yedam.mapper.MemberMapper;
+import com.yedam.vo.BoardVO;
 import com.yedam.vo.MemberVO;
 
 public class MemberServiceImpl implements MemberService{
@@ -24,5 +28,15 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO userCheck(String id, String pw) {
 		return mapper.selectMember(id, pw);
+	}
+	
+	@Override
+	public List<MemberVO> boardList(SearchDTO search) {		
+		return mapper.selectList(search); // DB - 업무(1:1 매칭)
+	}
+	
+	@Override
+	public int totalCount(SearchDTO search) {		
+		return mapper.selectCount(search);
 	}
 }

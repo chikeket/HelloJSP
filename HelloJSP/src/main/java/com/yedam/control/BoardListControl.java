@@ -29,6 +29,7 @@ public class BoardListControl implements Control{
 		//SearchDTO (메소드에 전달할 파라미터)
 		SearchDTO search = new SearchDTO();
 		search.setPage(Integer.parseInt(page));
+		
 		search.setSearchCondition(sc);
 		search.setKeyword(kw);
 		

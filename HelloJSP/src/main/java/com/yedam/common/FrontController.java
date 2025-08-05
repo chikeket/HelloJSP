@@ -49,7 +49,7 @@ public class FrontController extends HttpServlet{
 		map.put("/loginForm.do", new LoginFormControl()); //로그인화면
 		map.put("/login.do", new LoginControl()); //로그인
 		map.put("/logout.do", new LogoutControl()); //로그아웃
-//		map.put("/memberList.do", new MemberListControl()); //회원목록출력
+		map.put("/memberList.do", new MemberListControl()); //회원목록출력
 		
 	}
 	
