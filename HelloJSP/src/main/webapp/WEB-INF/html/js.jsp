@@ -23,7 +23,7 @@
   	영어: <input type="number" id="std_score"><br>
   	<button id="addList">추가</button>
   </div>
-  <div>
+  <div style="display:none;">
   <table border="2">
   
   <thead>
@@ -38,7 +38,37 @@
   
   </table>
   </div>
-  <script type="text/javascript" src='js/data.js'></script>
+  
+  <div id='show' >
+    <table border="2">
+     <thead>
+      <tr>
+       <!--  <th>ID</th><th>FName</th><th>LName</th><th>Email</th>
+       <th>gender</th><th>salary</th><th>삭제</th>-->
+       <th>ID</th><th>FName</th><th>LName</th><th>salary</th><th>삭제</th>
+      </tr>
+     </thead>
+     <tbody>
+     </tbody>
+    </table>
+  </div>
+  
+  <div id='item' style="display:none;">
+    <table border="2">
+     <thead>
+      <tr>
+       <!--  <th>ID</th><th>FName</th><th>LName</th><th>Email</th>
+       <th>gender</th><th>salary</th><th>삭제</th>-->
+       <th>이름</th><th>점수</th>
+      </tr>
+     </thead>
+     <tbody>
+     </tbody>
+    </table>
+  </div>
+  
+  <script type="text/javascript" src='js/ajax2.js'></script>
+  <!-- <script type="text/javascript" src='js/array3.js'></script> -->
   
 </body>
 </html>
