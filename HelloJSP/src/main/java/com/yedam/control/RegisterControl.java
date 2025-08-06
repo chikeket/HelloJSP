@@ -17,7 +17,7 @@ public class RegisterControl implements Control {
 		// 요청재지정 객체
 		
 			// 요청재지정. 경로는 webapp이 제일 상위경로라서 그 밑인 WEB_INF부터 적는거임
-			req.getRequestDispatcher("WEB-INF/html/register_form.jsp").forward(req, resp);
+			req.getRequestDispatcher("user/register_form.tiles").forward(req, resp);
 		
 
 	}

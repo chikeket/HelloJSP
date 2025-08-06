@@ -12,10 +12,10 @@ public class Main {
 		SqlSession sqlSession = DBUtil.getInstance().openSession();
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
 		
-		List<ReplyVO> list = mapper.replyList(147);
-		for (ReplyVO reply : list) {
-			System.out.println(reply);
-		}
+//		List<ReplyVO> list = mapper.replyList(147);
+//		for (ReplyVO reply : list) {
+//			System.out.println(reply);
+//		}
 		
 	}
 }

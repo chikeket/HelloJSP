@@ -21,9 +21,10 @@ public class ReplyListControl implements Control {
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 댓글목록(json)
 		resp.setContentType("text/json;charset=utf-8"); // 한글있을지도 모르니 코드지정
-		String bno = req.getParameter("bno");
+		String bno = req.getParameter("bno");		
+		String page = req.getParameter("page");		
 		ReplyService svc = new ReplyServiceImpl();
-		List<ReplyVO> list = svc.replyList(Integer.parseInt(bno));
+		List<ReplyVO> list = svc.replyList(Integer.parseInt(bno), Integer.parseInt(page));
 		
 		//Gson 라이브러리 활용해서 json문자열 만들기.
 		Gson gson = new GsonBuilder().create();
