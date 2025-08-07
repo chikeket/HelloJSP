@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.control.AddBoardControl;
 import com.yedam.control.AddReplyControl;
+import com.yedam.control.AddcalenderControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.CalenderListControl;
@@ -25,6 +26,7 @@ import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
 import com.yedam.control.RegisterControl;
 import com.yedam.control.RemoveReplyControl;
+import com.yedam.control.RemovecalenderControl;
 import com.yedam.control.ReplyListControl;
 import com.yedam.control.SignFormControl;
 import com.yedam.control.SignUpControl;
@@ -72,8 +74,8 @@ public class FrontController extends HttpServlet{
 		
 		// 캘린더
 		map.put("/calenderList.do", new CalenderListControl());
-		//map.put("/addcalender.do", new AddcalenderControl());
-		//map.put("/removecalender.do", new RemovecalenderControl());
+		map.put("/addCalendar.do", new AddcalenderControl());
+		map.put("/removeCalender.do", new RemovecalenderControl());
 		
 	}
 	

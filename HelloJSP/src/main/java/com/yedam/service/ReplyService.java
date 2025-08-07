@@ -1,6 +1,7 @@
 package com.yedam.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yedam.vo.CalenderVO;
 import com.yedam.vo.ReplyVO;
@@ -13,6 +14,6 @@ public interface ReplyService {
 	
 	//캘린더 리스트 추가 삭제
 	List<CalenderVO> calenderList();
-	boolean addCalender(CalenderVO calen); // 등록.	
-	boolean removeCalender(String title); // 삭제
+	boolean addCalender(Map<String, Object> calen); // 등록.	
+	boolean removeCalender(Map<String, Object> calen); // 삭제
 }

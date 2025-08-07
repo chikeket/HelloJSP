@@ -47,14 +47,14 @@
     from tbl_event
 	</select>
 	
-	<insert id="insertCalender" parameterType="com.yedam.vo.CalenderVO" >
+	<insert id="insertCalender" parameterType="map" >
 	insert into tbl_event (title, start_date, end_date)
-    values(#{title}, #{startDate}, #{endDate})
+    values(#{title}, #{start}, #{end})
 	</insert>
 	
-	<delete id="deleteCalender" parameterType="int">
+	<delete id="deleteCalender" parameterType="map">
 	delete from tbl_event
-	where title = #{title}
+	where title = #{title} and start_date = #{start} and end_date = #{end}
 	</delete>
 	
 </mapper>

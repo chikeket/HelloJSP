@@ -1,6 +1,7 @@
 package com.yedam.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -14,7 +15,7 @@ public interface ReplyMapper {
 	int selectCount(int replyNo); //댓글건수계산
 	// 목록, 추가, 삭제. -> mapper.xml 에 추가.
 	List<CalenderVO> calenderList();
-	int insertCalender(CalenderVO calen);
-	int deleteCalender(CalenderVO calen);
+	int insertCalender(Map<String, Object> calen);
+	int deleteCalender(Map<String, Object> calen);
 	
 }
