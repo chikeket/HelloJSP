@@ -19,14 +19,73 @@ function showReplyList() {
 	svc.replyList({bno, page},// 첫번째 param.
 		result => {
 			result.forEach(reply => {
-				let li = makeRow(reply);
-				document.querySelector('div.content>ul').appendChild(li);
+				// insertadjacenthtml
+				let target = document.querySelector('div.content>ul');
+				let text = `<li>
+						      <span class="col-sm-2">${reply.replyNo}</span>
+						      <span class="col-sm-5">${reply.reply}</span>
+						      <span class="col-sm-2">${reply.replyer}</span>
+						      <span class="col-sm-2"><button onclick='deleteRowFnc(event)'>삭제</button></span>
+					        </li>`;
+				target.insertAdjacentHTML('beforeend', text) //position, text
+				
+				//let li = makeRow(reply);
+				//document.querySelector('div.content>ul').appendChild(li);
 			})
+			// 페이징목록.
+			showPagingList();
 		}, //두번째 param.
 		err => console.error(err) // 세번째 param.
 		);
 }//end of showReplyList().
 showReplyList(); // 최초목록 출력.	
+
+// 페이징목록 출력.
+function showPagingList() {	
+svc.replyTotalCount(bno,
+	result => {
+		let totalCnt = result.totalCnt; // 80
+		let paging = new PageVO(page, totalCnt);
+		console.log(paging);
+		
+		// parent요소
+		let target = document.querySelector('div.pagination');
+		target.innerHTML = '';//기존목록삭제
+		// 이전페이지 여부.
+		if (paging.prev) {
+			let atag = document.createElement('a');
+			atag.href = paging.start-1;
+			atag.setAttribute('data-page', paging.start-1);
+			atag.innerHTML = '&laquo;';
+			target.appendChild(atag);
+		}
+		
+		// start ~ end
+		for(let p=paging.start; p<=paging.end; p++) {
+			let atag = document.createElement('a');
+			atag.href = p; //setAttribute('href', p);
+			if(p==page) {
+				atag.setAttribute('class', 'active');
+			}
+			atag.setAttribute('data-page', p);
+			atag.innerText = p;
+		    target.appendChild(atag);			
+		}
+		// 이후페이지 여부.
+		if (paging.next) {
+			let atag = document.createElement('a');
+			atag.href = paging.end + 1;
+			atag.setAttribute('data-page', paging.end + 1);
+			atag.innerHTML = '&raquo;';
+			target.appendChild(atag);
+		}
+		// a 태그에 클릭이벤트.
+		addEvent();
+	},
+	err => console.error(err)
+);
+}// end of showPagingList();
+
 // 이벤트 등록.
 document.querySelector('#addReply').addEventListener('click', function(e) {
 	//게시글번호(bno)/ 작성자(logId)/ 댓글(reply)
@@ -42,6 +101,9 @@ document.querySelector('#addReply').addEventListener('click', function(e) {
 							let r = result.retVal;
 							let li = makeRow(r);
 							document.querySelector('div.content>ul').appendChild(li);
+							
+							
+							
 						} else if (result.retCode == 'NG') {
 							alert('처리중 예외발생');				
 						}else {
@@ -52,15 +114,18 @@ document.querySelector('#addReply').addEventListener('click', function(e) {
 		);
 });
 // 페이징 링크에 클릭이벤트.
+function addEvent() {	
 document.querySelectorAll('div.footer>div.pagination>a')//
 .forEach(atag => {
 	atag.addEventListener('click', e => {
-		e.preventDefault(); //기본기능을 차단.
-		page = e.target.innerText;
+		e.preventDefault(); //기본기능을 차단.		
+		page = e.target.dataset.page; // data-page = dataset.page
+		console.log(page);
 		// 목록그려주기.
 		showReplyList();
-	})
-})	
+	  })
+  })
+}//end of addEvent
 // 댓글정보를 활용해서 li>span 구조를 만들기	
 function makeRow(reply) {
 	let li = document.createElement('li');
@@ -89,6 +154,7 @@ function makeRow(reply) {
 //데이터 삭제 함수 핸들러.
 function deleteRowFnc(e) {	
 			let rno = e.target.parentElement.parentElement.children[0].innerText;
+			rno = e.target.closest('li').children[0].innerText;
 			console.log(rno);
 			if(!confirm(`${rno} 번 글을 삭제하겠습니까?` )) {
 				alert('삭제를 취소했습니다.');
@@ -98,7 +164,8 @@ function deleteRowFnc(e) {
 		svc.removeReply(rno, //1번째 param.
 			            result => { //2번째 param.
 						if(result.retCode == 'OK'){
-							e.target.parentElement.parentElement.remove();
+							//e.target.parentElement.parentElement.remove();
+							showReplyList();
 						}else if(result.retCode == 'NG') {
 							alert("삭제실패!!");
 						} else {

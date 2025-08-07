@@ -10,7 +10,9 @@
 		select b.*
         from (select /*+ INDEX_DESC(b PK_REPLY)*/ r.* , rownum rn
               from tbl_reply r   
-              where r.board_no = #{boardNo}) b
+              where r.board_no = #{boardNo}
+              order by rn
+              ) b
         where b.rn > (#{page} - 1) * 5      
         <![CDATA[  
         and b.rn <= #{page} * 5
@@ -29,4 +31,30 @@
 	insert into tbl_reply (reply_no, board_no, reply, replyer)
     values(#{replyNo}, #{boardNo}, #{reply}, #{replyer})
 	</insert>
+	
+	<!-- 댓글건수계산 -->
+	<select id="selectCount" parameterType="int" resultType="int">
+	   select  count(1)       
+       from tbl_reply
+       where board_no = #{boardNo}       
+	</select>
+	
+	
+	<select id="calenderList" resultType="com.yedam.vo.CalenderVO">
+	select title ,
+	start_date as "start",
+	end_date as "end"
+    from tbl_event
+	</select>
+	
+	<insert id="insertCalender" parameterType="com.yedam.vo.CalenderVO" >
+	insert into tbl_event (title, start_date, end_date)
+    values(#{title}, #{startDate}, #{endDate})
+	</insert>
+	
+	<delete id="deleteCalender" parameterType="int">
+	delete from tbl_event
+	where title = #{title}
+	</delete>
+	
 </mapper>

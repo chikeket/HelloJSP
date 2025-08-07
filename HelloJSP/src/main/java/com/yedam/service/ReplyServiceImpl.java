@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.common.DBUtil;
 import com.yedam.mapper.ReplyMapper;
+import com.yedam.vo.CalenderVO;
 import com.yedam.vo.ReplyVO;
 
 public class ReplyServiceImpl implements ReplyService{
@@ -35,6 +36,29 @@ public class ReplyServiceImpl implements ReplyService{
 			sqlSession.commit();
 			return true;
 		}
+		return false;
+	}
+
+	@Override
+	public int replyCount(int boardNo) {
+		return mapper.selectCount(boardNo);		
+	}
+
+	@Override
+	public List<CalenderVO> calenderList() {
+		return mapper.calenderList();	
+		
+	}
+
+	@Override
+	public boolean addCalender(CalenderVO calen) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeCalender(String title) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 	

@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.yedam.common.DBUtil;
 import com.yedam.common.SearchDTO;
 import com.yedam.mapper.MemberMapper;
-import com.yedam.vo.BoardVO;
+
 import com.yedam.vo.MemberVO;
 
 public class MemberServiceImpl implements MemberService{
