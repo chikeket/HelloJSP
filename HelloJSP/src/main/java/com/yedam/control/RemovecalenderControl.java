@@ -13,6 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.yedam.common.Control;
 import com.yedam.service.ReplyService;
 import com.yedam.service.ReplyServiceImpl;
+import com.yedam.vo.CalenderVO;
 
 public class RemovecalenderControl implements Control {
 
@@ -29,17 +30,27 @@ public class RemovecalenderControl implements Control {
 		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("title", title);
-		map.put("start", start);
-		map.put("end", end);
+		CalenderVO calen = new CalenderVO();
+		calen.setTitle(title);
+		calen.setStart(start);
+		calen.setEnd(end);
+		map.put("calen", calen);
+		//map.put("start", start);
+		//map.put("end", end);
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();		
-		String json = gson.toJson(map); // 자바객체 -> json문자열.
 		//DB 처리. => 반환.
 		ReplyService svc = new ReplyServiceImpl();
-		if(svc.removeCalender(map)) {
+		try {
+			svc.removeCalender(calen);
+			map.put("retCode", "OK");
+			String json = gson.toJson(map); // 자바객체 -> json문자열.
 			resp.getWriter().print(json);			
-		} else {
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("retCode", "NG");
+			String json = gson.toJson(map); // 자바객체 -> json문자열.
+			resp.getWriter().print(json);			
 			System.out.println("쿼리에서 add가 작동하지않음");
 		}
 

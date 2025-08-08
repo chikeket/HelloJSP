@@ -19,6 +19,7 @@ function showReplyList() {
 	svc.replyList({bno, page},// 첫번째 param.
 		result => {
 			result.forEach(reply => {
+				console.log(reply);
 				// insertadjacenthtml
 				let target = document.querySelector('div.content>ul');
 				let text = `<li>
@@ -98,10 +99,13 @@ document.querySelector('#addReply').addEventListener('click', function(e) {
 			result => {
 						console.log(result);
 						if (result.retCode == 'OK') {
-							let r = result.retVal;
-							let li = makeRow(r);
-							document.querySelector('div.content>ul').appendChild(li);
+							//let r = result.retVal;
+							//let li = makeRow(r);
+							//document.querySelector('div.content>ul').appendChild(li);
 							
+							page = 1;	
+							document.querySelector('#reply').value = '';						
+							showReplyList();
 							
 							
 						} else if (result.retCode == 'NG') {

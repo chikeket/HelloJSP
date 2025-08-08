@@ -111,3 +111,89 @@ where member_id 'user02';
 
 --25.08.01
 alter table tbl_board add image varchar2(100);
+
+--25.08.05
+--댓글테이블(댓글번호, 원본글번호, 내용, 댓글작성자, 작성일시)
+create table tbl_reply (
+  reply_no number,
+  board_no number not null,
+  reply varchar2(500) not null,
+  replyer varchar2(10) not null,
+  reply_date date default sysdate
+);
+create sequence reply_seq;
+alter table tbl_reply add constraint pk_reply primary key (reply_no);
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values(reply_seq.nextval, 149, '149번의 댓글입니다', 'user01');
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values(reply_seq.nextval, 148, '148번의 댓글입니다', 'user01');
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values(reply_seq.nextval, 147, '147번의 댓글입니다', 'user03');
+
+select*
+from tbl_reply;
+
+update tbl_reply
+set board_no = 147
+where board_no = 149;
+
+select reply_seq.nextval from dual;
+
+--댓글 5개씩 페이징
+select ta.*
+from (select /*+ INDEX_DESC(b PK_REPLY)*/ rownum rn, b.*
+      from tbl_reply b
+      where b.board_no = 148
+      
+      ) ta
+where ta.rn > (:page - 1) * 5        
+  and ta.rn <= :page * 5;
+  
+  
+  select b.* from (select /*+ INDEX_DESC(r PK_REPLY)*/ rownum rn, r.* 
+                  from tbl_reply r where r.board_no = 148 ) b
+                  where b.rn > (1 - 1) * 5 
+                  and b.rn <= 1 * 5;
+  
+--페이지 건수 파악 질의
+select count(1)       
+from tbl_reply
+where board_no = 148;
+
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+select reply_seq.nextval, 148, '148번의 댓글입니다', 'user01'
+from tbl_reply;
+
+delete 
+from tbl_reply
+where reply_no >112;
+--25-08-07
+create table tbl_event (
+title varchar(100) not null,
+start_date varchar(20) not null,
+end_date varchar(20)
+);
+
+insert into tbl_event (title, start_date, end_date)
+values('미팅', '2025-09-08', '2025-09-09');
+
+insert into tbl_event (title, start_date)
+values('생일', '2025-09-18');
+
+insert into tbl_event (title, start_date, end_date)
+values('방학', '2025-09-15', '2025-09-18');
+
+insert into tbl_event (title, start_date)
+values('치과', '2025-09-14T18:00:00');
+
+insert into tbl_event (title, start_date)
+values('약먹자', '2025-09-16T07:20:00');
+
+select title,
+start_date as "start",
+end_date
+from tbl_event;

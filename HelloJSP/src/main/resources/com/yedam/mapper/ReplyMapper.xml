@@ -8,10 +8,10 @@
 
 	<select id="replyList" parameterType="int" resultType="reply">
 		select b.*
-        from (select /*+ INDEX_DESC(b PK_REPLY)*/ r.* , rownum rn
+        from (select /*+ INDEX_DESC(r PK_REPLY)*/ rownum rn, r.* 
               from tbl_reply r   
               where r.board_no = #{boardNo}
-              order by rn
+              
               ) b
         where b.rn > (#{page} - 1) * 5      
         <![CDATA[  
@@ -47,12 +47,12 @@
     from tbl_event
 	</select>
 	
-	<insert id="insertCalender" parameterType="map" >
+	<insert id="insertCalender" parameterType="com.yedam.vo.CalenderVO" >
 	insert into tbl_event (title, start_date, end_date)
     values(#{title}, #{start}, #{end})
 	</insert>
 	
-	<delete id="deleteCalender" parameterType="map">
+	<delete id="deleteCalender" parameterType="com.yedam.vo.CalenderVO">
 	delete from tbl_event
 	where title = #{title} and start_date = #{start} and end_date = #{end}
 	</delete>

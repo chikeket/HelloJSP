@@ -26,6 +26,7 @@ public class ReplyListControl implements Control {
 		ReplyService svc = new ReplyServiceImpl();
 		List<ReplyVO> list = svc.replyList(Integer.parseInt(bno), Integer.parseInt(page));
 		
+		
 		//Gson 라이브러리 활용해서 json문자열 만들기.
 		Gson gson = new GsonBuilder().create();
 		String json = gson.toJson(list);
